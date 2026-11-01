@@ -6,7 +6,7 @@ import {
   EnrollmentStatus,
   PrismaClient,
   Prisma,
-} from '@prisma/client';
+} from '../generated/prisma';
 import {
   EVENTS,
   EventBus,

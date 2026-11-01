@@ -5,7 +5,7 @@
  *
  * Run: pnpm --filter course-service seed
  */
-import { CourseLevel, CourseStatus, LessonType, PrismaClient, ResourceKind } from '@prisma/client';
+import { CourseLevel, CourseStatus, LessonType, PrismaClient, ResourceKind } from '../src/generated/prisma';
 
 const prisma = new PrismaClient();
 

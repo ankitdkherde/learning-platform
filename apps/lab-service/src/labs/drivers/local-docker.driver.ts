@@ -1,7 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { spawn, ChildProcessWithoutNullStreams } from 'node:child_process';
-import type { LabTemplate } from '@prisma/client';
+import type { LabTemplate } from '../../generated/prisma';
 import type { LabAttachment, LabDriverPort, ProvisionResult } from './driver.port';
 
 /**

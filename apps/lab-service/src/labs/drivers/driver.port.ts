@@ -1,4 +1,4 @@
-import type { LabTemplate } from '@prisma/client';
+import type { LabTemplate } from '../../generated/prisma';
 
 /**
  * What lab-service needs from "a thing that can give a student a shell".

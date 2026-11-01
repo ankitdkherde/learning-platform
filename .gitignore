@@ -10,6 +10,7 @@ coverage/
 .DS_Store
 .turbo/
 apps/*/prisma/generated/
+apps/*/src/generated/
 playwright-report/
 test-results/
 *.tsbuildinfo

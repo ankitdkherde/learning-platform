@@ -1,7 +1,7 @@
 import { ForbiddenException, Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import axios from 'axios';
-import { EnrollmentStatus, LessonProgressStatus } from '@prisma/client';
+import { EnrollmentStatus, LessonProgressStatus } from '../generated/prisma';
 import { EVENTS, EventBus, HEADER_INTERNAL_KEY, LessonCompletedEvent } from '@lp/shared';
 import { PrismaService } from '../prisma/prisma.module';
 import { EnrollmentsService } from '../enrollments/enrollments.service';

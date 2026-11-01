@@ -2,7 +2,7 @@ import { Injectable, Logger, ServiceUnavailableException } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config';
 import { PassThrough } from 'node:stream';
 import * as k8s from '@kubernetes/client-node';
-import type { LabTemplate } from '@prisma/client';
+import type { LabTemplate } from '../../generated/prisma';
 import type { LabAttachment, LabDriverPort, ProvisionResult } from './driver.port';
 
 /**
@@ -102,7 +102,7 @@ export class KubernetesDriver implements LabDriverPort {
           limits: [
             {
               type: 'Container',
-              default: { cpu: template.cpuLimit, memory: template.memoryLimit },
+              _default: { cpu: template.cpuLimit, memory: template.memoryLimit },
               defaultRequest: { cpu: template.cpuRequest, memory: template.memoryRequest },
               max: { cpu: template.cpuLimit, memory: template.memoryLimit },
             },

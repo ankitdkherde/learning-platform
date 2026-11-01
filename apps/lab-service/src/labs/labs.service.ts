@@ -12,7 +12,7 @@ import { ConfigService } from '@nestjs/config';
 import { Cron, CronExpression } from '@nestjs/schedule';
 import axios from 'axios';
 import { createHash, randomBytes } from 'node:crypto';
-import { LabDriver, LabSessionStatus, type LabSession, type LabTemplate } from '@prisma/client';
+import { LabDriver, LabSessionStatus, type LabSession, type LabTemplate } from '../generated/prisma';
 import { HEADER_INTERNAL_KEY } from '@lp/shared';
 import { PrismaService } from '../prisma/prisma.module';
 import { LAB_DRIVER, type LabDriverPort, type ProvisionResult } from './drivers/driver.port';

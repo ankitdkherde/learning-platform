@@ -8,6 +8,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
 }
 
 datasource db {
@@ -64,42 +65,42 @@ model Category {
 }
 
 model Course {
-  id               String       @id @default(uuid()) @db.Uuid
-  slug             String       @unique @db.VarChar(140)
-  title            String       @db.VarChar(200)
-  subtitle         String?      @db.VarChar(300)
-  description      String       @db.Text
+  id              String       @id @default(uuid()) @db.Uuid
+  slug            String       @unique @db.VarChar(140)
+  title           String       @db.VarChar(200)
+  subtitle        String?      @db.VarChar(300)
+  description     String       @db.Text
   /// Bullet points shown on the sales page.
-  outcomes         String[]     @default([])
-  prerequisites    String[]     @default([])
-  level            CourseLevel  @default(BEGINNER)
-  language         String       @default("en") @db.VarChar(10)
-  status           CourseStatus @default(DRAFT)
+  outcomes        String[]     @default([])
+  prerequisites   String[]     @default([])
+  level           CourseLevel  @default(BEGINNER)
+  language        String       @default("en") @db.VarChar(10)
+  status          CourseStatus @default(DRAFT)
   /// Price in the smallest currency unit (paise). Integer money only - never float.
-  priceMinor       Int          @default(0) @map("price_minor")
+  priceMinor      Int          @default(0) @map("price_minor")
   /// Optional strike-through price for marketing.
-  listPriceMinor   Int?         @map("list_price_minor")
-  currency         String       @default("INR") @db.VarChar(3)
-  isFree           Boolean      @default(false) @map("is_free")
-  thumbnailKey     String?      @map("thumbnail_key") @db.VarChar(400)
-  promoVideoKey    String?      @map("promo_video_key") @db.VarChar(400)
-  durationMinutes  Int          @default(0) @map("duration_minutes")
+  listPriceMinor  Int?         @map("list_price_minor")
+  currency        String       @default("INR") @db.VarChar(3)
+  isFree          Boolean      @default(false) @map("is_free")
+  thumbnailKey    String?      @map("thumbnail_key") @db.VarChar(400)
+  promoVideoKey   String?      @map("promo_video_key") @db.VarChar(400)
+  durationMinutes Int          @default(0) @map("duration_minutes")
   /// Denormalised counters kept in sync by the service (cheap listing pages).
-  lessonCount      Int          @default(0) @map("lesson_count")
-  enrollmentCount  Int          @default(0) @map("enrollment_count")
-  ratingAvg        Decimal?     @map("rating_avg") @db.Decimal(3, 2)
-  categoryId       String?      @map("category_id") @db.Uuid
-  category         Category?    @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  lessonCount     Int          @default(0) @map("lesson_count")
+  enrollmentCount Int          @default(0) @map("enrollment_count")
+  ratingAvg       Decimal?     @map("rating_avg") @db.Decimal(3, 2)
+  categoryId      String?      @map("category_id") @db.Uuid
+  category        Category?    @relation(fields: [categoryId], references: [id], onDelete: SetNull)
   /// user id from auth_db - deliberately NOT a foreign key (separate database).
-  instructorId     String       @map("instructor_id") @db.Uuid
-  instructorName   String       @map("instructor_name") @db.VarChar(120)
-  tags             String[]     @default([])
-  publishedAt      DateTime?    @map("published_at")
-  createdAt        DateTime     @default(now()) @map("created_at")
-  updatedAt        DateTime     @updatedAt @map("updated_at")
-  deletedAt        DateTime?    @map("deleted_at")
-  createdBy        String?      @map("created_by") @db.Uuid
-  updatedBy        String?      @map("updated_by") @db.Uuid
+  instructorId    String       @map("instructor_id") @db.Uuid
+  instructorName  String       @map("instructor_name") @db.VarChar(120)
+  tags            String[]     @default([])
+  publishedAt     DateTime?    @map("published_at")
+  createdAt       DateTime     @default(now()) @map("created_at")
+  updatedAt       DateTime     @updatedAt @map("updated_at")
+  deletedAt       DateTime?    @map("deleted_at")
+  createdBy       String?      @map("created_by") @db.Uuid
+  updatedBy       String?      @map("updated_by") @db.Uuid
 
   modules CourseModule[]
   coupons CouponCourse[]
@@ -112,16 +113,16 @@ model Course {
 }
 
 model CourseModule {
-  id          String   @id @default(uuid()) @db.Uuid
-  courseId    String   @map("course_id") @db.Uuid
-  course      Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
-  title       String   @db.VarChar(200)
-  summary     String?  @db.VarChar(1000)
-  sortOrder   Int      @map("sort_order")
-  isPreview   Boolean  @default(false) @map("is_preview")
-  createdAt   DateTime @default(now()) @map("created_at")
-  updatedAt   DateTime @updatedAt @map("updated_at")
-  deletedAt   DateTime? @map("deleted_at")
+  id        String    @id @default(uuid()) @db.Uuid
+  courseId  String    @map("course_id") @db.Uuid
+  course    Course    @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  title     String    @db.VarChar(200)
+  summary   String?   @db.VarChar(1000)
+  sortOrder Int       @map("sort_order")
+  isPreview Boolean   @default(false) @map("is_preview")
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
 
   lessons Lesson[]
 
@@ -165,19 +166,19 @@ model Lesson {
 }
 
 model LessonResource {
-  id          String       @id @default(uuid()) @db.Uuid
-  lessonId    String       @map("lesson_id") @db.Uuid
-  lesson      Lesson       @relation(fields: [lessonId], references: [id], onDelete: Cascade)
-  kind        ResourceKind @default(PDF)
-  title       String       @db.VarChar(200)
+  id         String       @id @default(uuid()) @db.Uuid
+  lessonId   String       @map("lesson_id") @db.Uuid
+  lesson     Lesson       @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  kind       ResourceKind @default(PDF)
+  title      String       @db.VarChar(200)
   /// Private S3 key. Downloaded through a short-lived signed URL only.
-  storageKey  String       @map("storage_key") @db.VarChar(400)
-  sizeBytes   Int?         @map("size_bytes")
-  mimeType    String?      @map("mime_type") @db.VarChar(120)
-  sortOrder   Int          @default(0) @map("sort_order")
-  createdAt   DateTime     @default(now()) @map("created_at")
-  updatedAt   DateTime     @updatedAt @map("updated_at")
-  deletedAt   DateTime?    @map("deleted_at")
+  storageKey String       @map("storage_key") @db.VarChar(400)
+  sizeBytes  Int?         @map("size_bytes")
+  mimeType   String?      @map("mime_type") @db.VarChar(120)
+  sortOrder  Int          @default(0) @map("sort_order")
+  createdAt  DateTime     @default(now()) @map("created_at")
+  updatedAt  DateTime     @updatedAt @map("updated_at")
+  deletedAt  DateTime?    @map("deleted_at")
 
   @@index([lessonId])
   @@map("lesson_resources")

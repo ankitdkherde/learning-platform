@@ -11,6 +11,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
 }
 
 datasource db {
@@ -37,25 +38,25 @@ enum LessonProgressStatus {
 }
 
 model Enrollment {
-  id            String           @id @default(uuid()) @db.Uuid
+  id              String           @id @default(uuid()) @db.Uuid
   /// user id from auth_db, course id from course_db. No cross-database FKs.
-  userId        String           @map("user_id") @db.Uuid
-  courseId      String           @map("course_id") @db.Uuid
-  status        EnrollmentStatus @default(ACTIVE)
-  source        EnrollmentSource @default(PAYMENT)
+  userId          String           @map("user_id") @db.Uuid
+  courseId        String           @map("course_id") @db.Uuid
+  status          EnrollmentStatus @default(ACTIVE)
+  source          EnrollmentSource @default(PAYMENT)
   /// Payment id from payment_db, for support and refund reversal.
-  paymentId     String?          @map("payment_id") @db.Uuid
+  paymentId       String?          @map("payment_id") @db.Uuid
   /// Null = lifetime access. Set for subscription or cohort based access.
-  expiresAt     DateTime?        @map("expires_at")
+  expiresAt       DateTime?        @map("expires_at")
   /// Cached from progress records so "My courses" is one query.
-  progressPercent Int            @default(0) @map("progress_percent")
-  lastAccessedAt DateTime?       @map("last_accessed_at")
-  completedAt   DateTime?        @map("completed_at")
-  certificateId String?          @map("certificate_id") @db.Uuid
-  createdAt     DateTime         @default(now()) @map("created_at")
-  updatedAt     DateTime         @updatedAt @map("updated_at")
-  revokedAt     DateTime?        @map("revoked_at")
-  revokedReason String?          @map("revoked_reason") @db.VarChar(120)
+  progressPercent Int              @default(0) @map("progress_percent")
+  lastAccessedAt  DateTime?        @map("last_accessed_at")
+  completedAt     DateTime?        @map("completed_at")
+  certificateId   String?          @map("certificate_id") @db.Uuid
+  createdAt       DateTime         @default(now()) @map("created_at")
+  updatedAt       DateTime         @updatedAt @map("updated_at")
+  revokedAt       DateTime?        @map("revoked_at")
+  revokedReason   String?          @map("revoked_reason") @db.VarChar(120)
 
   /// One active enrollment per user per course.
   @@unique([userId, courseId])
@@ -65,17 +66,17 @@ model Enrollment {
 }
 
 model LessonProgress {
-  id                 String               @id @default(uuid()) @db.Uuid
-  userId             String               @map("user_id") @db.Uuid
-  courseId           String               @map("course_id") @db.Uuid
-  lessonId           String               @map("lesson_id") @db.Uuid
-  status             LessonProgressStatus @default(STARTED)
+  id                  String               @id @default(uuid()) @db.Uuid
+  userId              String               @map("user_id") @db.Uuid
+  courseId            String               @map("course_id") @db.Uuid
+  lessonId            String               @map("lesson_id") @db.Uuid
+  status              LessonProgressStatus @default(STARTED)
   /// Resume point for the video player.
-  lastPositionSeconds Int                 @default(0) @map("last_position_seconds")
-  watchedSeconds     Int                  @default(0) @map("watched_seconds")
-  completedAt        DateTime?            @map("completed_at")
-  createdAt          DateTime             @default(now()) @map("created_at")
-  updatedAt          DateTime             @updatedAt @map("updated_at")
+  lastPositionSeconds Int                  @default(0) @map("last_position_seconds")
+  watchedSeconds      Int                  @default(0) @map("watched_seconds")
+  completedAt         DateTime?            @map("completed_at")
+  createdAt           DateTime             @default(now()) @map("created_at")
+  updatedAt           DateTime             @updatedAt @map("updated_at")
 
   @@unique([userId, lessonId])
   @@index([userId, courseId])

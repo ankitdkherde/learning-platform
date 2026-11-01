@@ -9,7 +9,7 @@ import {
 import { ConfigService } from '@nestjs/config';
 import axios from 'axios';
 import { createHmac, randomBytes, timingSafeEqual } from 'node:crypto';
-import { CertificateStatus } from '@prisma/client';
+import { CertificateStatus } from '../generated/prisma';
 import {
   EVENTS,
   EventBus,

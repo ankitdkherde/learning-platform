@@ -1,5 +1,5 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
-import { CourseStatus, Prisma } from '@prisma/client';
+import { CourseStatus, Prisma } from '../generated/prisma';
 import slugify from 'slugify';
 import { PrismaService } from '../prisma/prisma.module';
 import {

@@ -13,7 +13,7 @@ import {
   Min,
   MinLength,
 } from 'class-validator';
-import { CourseLevel, CourseStatus, LessonType, ResourceKind } from '@prisma/client';
+import { CourseLevel, CourseStatus, LessonType, ResourceKind } from '../../generated/prisma';
 
 export class CreateCourseDto {
   @ApiProperty({ example: 'DevOps & SRE Engineering' })

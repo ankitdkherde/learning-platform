@@ -2,7 +2,7 @@
  * Seeds an admin and a demo student so you can sign in immediately.
  * Run: pnpm --filter auth-service seed
  */
-import { PrismaClient, Role, UserStatus } from '@prisma/client';
+import { PrismaClient, Role, UserStatus } from '../src/generated/prisma';
 import * as bcrypt from 'bcryptjs';
 
 const prisma = new PrismaClient();

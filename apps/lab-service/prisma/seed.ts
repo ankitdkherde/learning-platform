@@ -2,7 +2,7 @@
  * Lab templates. The ids are deterministic so course-service's seed can point
  * LAB lessons at them without a cross-database join or a lookup at boot.
  */
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '../src/generated/prisma';
 
 const prisma = new PrismaClient();
 

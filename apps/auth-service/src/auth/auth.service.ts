@@ -7,7 +7,7 @@ import {
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import * as bcrypt from 'bcryptjs';
-import { Role as PrismaRole, TokenPurpose, User, UserStatus } from '@prisma/client';
+import { Role as PrismaRole, TokenPurpose, User, UserStatus } from '../generated/prisma';
 import { EVENTS, EventBus, Role, UserRegisteredEvent } from '@lp/shared';
 import { PrismaService } from '../prisma/prisma.service';
 import { TokensService } from './tokens.service';
